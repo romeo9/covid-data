@@ -34,7 +34,7 @@ class AllCountry extends React.Component {
                         <Statistic.Value>{this.numberWithCommas(deaths)}</Statistic.Value>
                         <Statistic.Label>Deaths</Statistic.Label>
                     </Statistic>
-                    <Statistic color='yellow'>
+                    <Statistic color='green'>
                         <Statistic.Value>{this.numberWithCommas(recovered)}</Statistic.Value>
                         <Statistic.Label>Recovered</Statistic.Label>
                     </Statistic>
