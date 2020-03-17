@@ -46,9 +46,6 @@ class TableData extends React.Component {
 
       const { columns, data, totalPages, firstItem, lastItem } = this.state
       const tempData = data.slice(firstItem, lastItem)
-      console.log("FIRST ITEM: "+firstItem)
-      console.log("LAST ITEM: "+lastItem)
-      console.log(tempData)
 
         return(
       <Segment>
