@@ -1,7 +1,8 @@
 import React from 'react';
-import { Container, Statistic, Header, Icon, Segment} from 'semantic-ui-react';
+import { Container, Statistic, Header, Segment } from 'semantic-ui-react';
+import italy from '../../icons/italy.png'
 
-class AllCountry extends React.Component {
+class ItalyData extends React.Component {
 
     constructor(props){
         super(props)
@@ -19,30 +20,30 @@ class AllCountry extends React.Component {
 
     render(){
 
-        const cases = this.props.data.length!==0 && this.props.data.flatMap(i => i.cases).reduce((a,b) => a+b)
-        const deaths = this.props.data.length!==0 && this.props.data.flatMap(i => i.deaths).reduce((a,b) => a+b)
-        const recovered = this.props.data.length!==0 && this.props.data.flatMap(i => i.recovered).reduce((a,b) => a+b)
+        const cases = this.props.data.length!==0 && this.props.data.filter(i => i.country==="Italy")[0].cases
+        const deaths = this.props.data.length!==0 && this.props.data.filter(i => i.country==="Italy")[0].deaths
+        const recovered = this.props.data.length!==0 && this.props.data.filter(i => i.country==="Italy")[0].recovered
 
         return(
-            <Segment style={{paddingTop: '3.2em'}}>
-                <Container fluid textAlign='center'>
+            <Segment >
+                <Container fluid>
                     <Header as='h2' icon size='medium'>
-                        <Icon name='world' size='tiny' />
-                                Total World's Data
+                        <img src={italy} className='icon-italy' alt='Italy'/>
+                            Italy Data
                         <Header.Subheader>
-                            Sum of Infection data
+                            Sum of Infection data of Italy
                         </Header.Subheader>
                     </Header>
-                    <Statistic.Group widths={3} size='small'>
-                        <Statistic color='red'>
+                    <Statistic.Group widths={3} size='small' >
+                        <Statistic  color='red'>
                             <Statistic.Value>{this.numberWithCommas(cases)}</Statistic.Value>
                             <Statistic.Label>Cases</Statistic.Label>
                         </Statistic>
-                        <Statistic color='black'>
+                        <Statistic  color='black'>
                             <Statistic.Value>{this.numberWithCommas(deaths)}</Statistic.Value>
                             <Statistic.Label>Deaths</Statistic.Label>
                         </Statistic>
-                        <Statistic color='green'>
+                        <Statistic  color='green'>
                             <Statistic.Value>{this.numberWithCommas(recovered)}</Statistic.Value>
                             <Statistic.Label>Recovered</Statistic.Label>
                         </Statistic>
@@ -53,4 +54,4 @@ class AllCountry extends React.Component {
     }
 }
 
-export default AllCountry;
+export default ItalyData;

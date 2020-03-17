@@ -1,6 +1,6 @@
 import React from 'react';
-import { Table, Container, Segment } from 'semantic-ui-react';
-
+import { Table, Container, Segment, Pagination } from 'semantic-ui-react';
+import { properties } from '../../properties/properties.js'
 
 class TableData extends React.Component {
 
@@ -17,21 +17,43 @@ class TableData extends React.Component {
           { id: 'active', label: 'Active'},
           { id: 'critical', label: 'Critical'}
       ],
-        rowsPerPage: 10
+        rowsPerPage: properties.numberOfRows,
+        firstItem: 0,
+        lastItem: properties.numberOfRows,
+        totalPages: 0,
+        data: this.props.data,
+        activePage: 1
       }  
     }
 
+    UNSAFE_componentWillReceiveProps(nextProps){
+      if(nextProps.data !== null && nextProps.data.length !== 0){
+        this.setState({
+          data: nextProps.data,
+          totalPages: Math.floor(nextProps.data.length/this.state.rowsPerPage)+1
+        })
+      }
+    }
+
+    handlePageChanges = (e, { activePage }) => 
+          this.setState({ 
+            activePage: activePage,  
+            firstItem: (activePage-1)*this.state.rowsPerPage,
+            lastItem: activePage*this.state.rowsPerPage-1
+          })
 
     render(){
 
-      const columns = this.state.columns
-      const data = this.props.data
-      
+      const { columns, data, totalPages, firstItem, lastItem } = this.state
+      const tempData = data.slice(firstItem, lastItem)
+      console.log("FIRST ITEM: "+firstItem)
+      console.log("LAST ITEM: "+lastItem)
+      console.log(tempData)
 
         return(
       <Segment>
       <Container>
-        <Table striped>
+        <Table striped selectable>
           <Table.Header>
             <Table.Row>
               {columns.map(column => (
@@ -45,9 +67,9 @@ class TableData extends React.Component {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            { data.map(i => {
+            { tempData.map((i, index) => {
               return(
-                <Table.Row>
+                <Table.Row key={index}>
                   <Table.Cell>{i.country}</Table.Cell>
                   <Table.Cell>{i.cases}</Table.Cell>
                   <Table.Cell>{i.todayCases}</Table.Cell>
@@ -60,17 +82,23 @@ class TableData extends React.Component {
               )
             })}
           </Table.Body>
+
+          <Table.Footer>
+            <Table.Row>
+              <Table.HeaderCell colSpan={8}>
+                <Pagination 
+                pointing
+                secondary
+                defaultActivePage={this.state.activePage} 
+                totalPages={totalPages} 
+                boundaryRange={2}
+                onPageChange={this.handlePageChanges}
+                />
+              </Table.HeaderCell>
+            </Table.Row>
+      </Table.Footer>
         </Table>
       </Container>
-      {/* <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-      /> */}
     </Segment>
         )
     }

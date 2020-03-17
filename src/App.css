@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+.ui.header>img.icon-italy {
+  display: block;
+  padding: 5px;
+  width: 5em;
+  margin-left: 2.5em;
+}

@@ -1,18 +1,23 @@
 import React from 'react';
-import { Container } from 'semantic-ui-react';
-
-/*
-    maxWidth options:
-    xs, sm, md, lg, xl.
-*/
+import { Container, Header, Icon, Segment } from 'semantic-ui-react';
 
 class Title extends React.Component {
 
     render(){
         return(
-            <Container>
-                <h1>Covid-19</h1>
-            </Container>
+            <Segment style={{marginTop: '2em'}}>
+                <Container 
+                style={{paddingTop: '2em'}}
+                textAlign='center'>
+                    <Header color='red' as='h1' icon>
+                        <Icon name='dna' />
+                            Covid-19
+                        <Header.Subheader>
+                            Real-time data of Covid-19's infection
+                        </Header.Subheader>
+                    </Header>
+                </Container>
+            </Segment>
         )
     }
 }
