@@ -15,11 +15,11 @@ class TableData extends React.Component {
           { id: 'todayDeaths', label: 'Today Deaths' },
           { id: 'recovered', label: 'Recovered'},
           { id: 'active', label: 'Active'},
-          { id: 'critical', label: 'Critical'}
+          { id: 'critical', label: 'Critical'},
       ],
         rowsPerPage: properties.numberOfRows,
         firstItem: 0,
-        lastItem: properties.numberOfRows,
+        lastItem: properties.numberOfRows - 1,
         totalPages: 0,
         data: this.props.data,
         activePage: 1
@@ -45,7 +45,7 @@ class TableData extends React.Component {
     render(){
 
       const { columns, data, totalPages, firstItem, lastItem } = this.state
-      const tempData = data.slice(firstItem, lastItem)
+      const tempData = data.slice(firstItem, lastItem+1)
 
         return(
       <Segment>
