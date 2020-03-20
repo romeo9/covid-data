@@ -21,10 +21,23 @@ class ExternalContainer extends React.Component {
         fetch(properties.websiteUrl)
           .then(response => response.json())
           .then(jsonResponse => this.setState({ data: jsonResponse }))
+
+        this.update()
       }
+
+    update = () => {
+        this.setState({
+          height: window.innerHeight,
+          width: window.innerWidth
+        });
+      };
+    
+
 
   render (){
     const data = this.state.data
+
+    const middleRowColumns = this.state.width > 700 ? 2 : 1;
 
       return(
         <Container>
@@ -34,7 +47,7 @@ class ExternalContainer extends React.Component {
                         <Title></Title>
                     </Grid.Column>
                 </Grid.Row>
-                <Grid.Row columns={2}>
+                <Grid.Row columns={middleRowColumns}>
                     <Grid.Column>
                         <AllCountry
                             data = {data}

@@ -43,3 +43,11 @@
   width: 5em;
   margin-left: 2.5em;
 }
+
+@media only screen and (max-width: 500px){
+
+  html{
+    resize: both;
+    overflow: auto;
+  }
+}
