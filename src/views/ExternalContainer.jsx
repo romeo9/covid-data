@@ -48,13 +48,17 @@ class ExternalContainer extends React.Component {
                     </Grid.Column>
                 </Grid.Row>
                 <Grid.Row columns={middleRowColumns}>
-                    <Grid.Column>
+                    <Grid.Column className='all-country-column'>
                         <AllCountry
+                            className='all-country'
                             data = {data}
                         />
                     </Grid.Column>
                     <Grid.Column>
-                        <ItalyData data={data}></ItalyData>
+                        <ItalyData 
+                            className='italy-data'
+                            data={data}
+                        />
                     </Grid.Column>
                 </Grid.Row>
                 <Grid.Row columns={1}>

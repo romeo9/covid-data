@@ -25,7 +25,7 @@ class ItalyData extends React.Component {
         const recovered = this.props.data.length!==0 && this.props.data.filter(i => i.country==="Italy")[0].recovered
 
         return(
-            <Segment >
+            <Segment className={this.props.className}>
                 <Container fluid>
                     <Header as='h2' icon size='medium'>
                         <img src={italy} className='icon-italy' alt='Italy'/>
@@ -34,7 +34,7 @@ class ItalyData extends React.Component {
                             Sum of Infection data of Italy
                         </Header.Subheader>
                     </Header>
-                    <Statistic.Group widths={3} size='small' >
+                    <Statistic.Group className={this.props.className} widths={3} size='small' >
                         <Statistic  color='red'>
                             <Statistic.Value>{this.numberWithCommas(cases)}</Statistic.Value>
                             <Statistic.Label>Cases</Statistic.Label>

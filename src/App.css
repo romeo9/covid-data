@@ -50,4 +50,20 @@
     resize: both;
     overflow: auto;
   }
+
+  .ui.segment.all-country{
+    padding-top: '3.2em';
+  }
+
+  .ui.small.three.statistics.all-country{
+    display: grid;
+  }
+
+  .ui.segment.italy-data{
+    padding-top: '3.2em';
+  }
+
+  .ui.small.three.statistics.italy-data{
+    display: grid;
+  }
 }
