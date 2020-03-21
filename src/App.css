@@ -43,6 +43,9 @@
   width: 5em;
   margin-left: 2.5em;
 }
+.ui.segment.all-country {
+  padding-top: 3.3em;
+}
 
 @media only screen and (max-width: 500px){
 
@@ -65,5 +68,10 @@
 
   .ui.small.three.statistics.italy-data{
     display: grid;
+  }
+
+  table.ui.selectable.striped.table{
+    text-align: center;
+    display: block;
   }
 }

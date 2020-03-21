@@ -39,6 +39,7 @@ class ExternalContainer extends React.Component {
 
     const middleRowColumns = this.state.width > 700 ? 2 : 1;
 
+
       return(
         <Container>
             <Grid divided='vertically'>
@@ -64,6 +65,7 @@ class ExternalContainer extends React.Component {
                 <Grid.Row columns={1}>
                     <Grid.Column>
                         <TableData
+                            responsive = {this.state.width <= 700}
                             data = {data}
                         />
                         </Grid.Column>
