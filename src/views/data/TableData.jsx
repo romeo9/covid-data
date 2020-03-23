@@ -10,12 +10,12 @@ class TableData extends React.Component {
         columns: [
           { id: 'country', label: 'Country', minWidth: 170 },
           { id: 'cases', label: 'Cases', minWidth: 100 },
-          { id: 'todayCases', label: 'Today Cases', color: 'yellow'},
+          { id: 'todayCases', label: 'Today Cases', color: 'yellow' },
           { id: 'deaths', label: 'Deaths', color: 'red' },
           { id: 'todayDeaths', label: 'Today Deaths' },
-          { id: 'recovered', label: 'Recovered', color: 'green'},
-          { id: 'active', label: 'Active'},
-          { id: 'critical', label: 'Critical', color: 'blue'},
+          { id: 'recovered', label: 'Recovered', color: 'green' },
+          { id: 'active', label: 'Active' },
+          { id: 'critical', label: 'Critical', color: 'blue' },
       ],
         rowsPerPage: properties.numberOfRows,
         firstItem: 0,
@@ -82,7 +82,7 @@ class TableData extends React.Component {
             { tempData.map((i, index) => {
               return(
                 <Table.Row key={index}>
-                  <Table.Cell>{i.country}</Table.Cell>
+                  <Table.Cell style={{fontSize: '25px'}}>{i.country}</Table.Cell>
                   {this.renderSingleTableRow(responsive, columns[1].label, i.cases, columns[1].color)}
                   {this.renderSingleTableRow(responsive, columns[2].label, i.todayCases, columns[2].color)}
                   {this.renderSingleTableRow(responsive, columns[3].label, i.deaths, columns[3].color)}

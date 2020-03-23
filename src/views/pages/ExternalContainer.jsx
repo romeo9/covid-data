@@ -1,10 +1,10 @@
 import React from 'react';
-import Title from './title/Title';
-import TableData from './data/TableData';
-import AllCountry from './data/AllCountry';
+import Title from '../title/Title';
+import TableData from '../data/TableData';
+import AllCountry from '../data/AllCountry';
 import { Grid, Container } from 'semantic-ui-react';
-import { properties } from '../properties/properties'
-import ItalyData from './data/ItalyData';
+import { properties } from '../../properties/properties'
+import ItalyData from '../data/ItalyData';
 
 
 class ExternalContainer extends React.Component {
