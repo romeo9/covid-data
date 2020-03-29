@@ -12,7 +12,8 @@ class ItalyAxesPlot extends React.Component {
     
     parseDate(date) {
         let daydate = new Date(date)
-        let output = daydate.getDate() + '/' + daydate.getMonth() + '/' + daydate.getFullYear();
+        //date month start to count month from zero
+        const output = daydate.getDate() + '/' + (daydate.getMonth()+1) + '/' + daydate.getFullYear();
         return output
     }
 
@@ -26,6 +27,7 @@ class ItalyAxesPlot extends React.Component {
         const { height, width } = this.props
 
         let data = this.props.data
+
         let dataLength = this.props.data !== null && this.props.data.length
         
         if(this.props.data!=null && this.props.data.length > 27){
@@ -41,6 +43,7 @@ class ItalyAxesPlot extends React.Component {
             }
             
         }
+        console.log(data)
 
         const MARGIN = {
             left: width <= 1200 ? 0 : 60,

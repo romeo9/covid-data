@@ -36,7 +36,7 @@ class ItalyInfo extends React.Component {
         const { nationalTrend, height, width } = this.state
 
         return(
-            <Grid columns={width <= 1220 ? 1 : 2} verticalAlign={ width <= 1220 ? 'middle' : ''}>
+            <Grid columns={width <= 1220 ? 1 : 2} verticalAlign={ width <= 1220 ? 'middle' : null}>
                 <Grid.Column >
                     <div style={{marginTop: '6em', marginLeft: '5em'}}>
                     <Card 
