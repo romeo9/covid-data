@@ -18,7 +18,7 @@ class ExternalContainer extends React.Component {
 
 
     componentDidMount(){
-        fetch(properties.websiteUrl)
+        fetch(properties.websiteUrlAllCountries)
           .then(response => response.json())
           .then(jsonResponse => this.setState({ data: jsonResponse }))
 
