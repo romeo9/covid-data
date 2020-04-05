@@ -54,8 +54,7 @@ class ItalyInfo extends React.Component {
                     </Grid.Column>
                 </Grid.Row>
                     <Grid.Column>
-                        <ItalyRadialChart
-                            data = {confirmedCasesPerDay}/>
+                        <ItalyRadialChart/>
                     </Grid.Column>
             </Grid>
         )

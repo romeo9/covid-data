@@ -44,8 +44,6 @@ class ItalyAxesPlot extends React.Component {
         const { data } = this.state
 
         let newData = (data!=null && data.length > 0 )? data : []
-        console.log(newData)
-        
 
         let dataLength = data !== null && data.length
         

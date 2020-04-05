@@ -1,5 +1,7 @@
 import React from 'react';
 import { RadialChart, Hint } from 'react-vis';
+import { properties } from '../../properties/properties'
+
 
 class ItalyRadialChart extends React.Component {
 
@@ -8,18 +10,26 @@ class ItalyRadialChart extends React.Component {
         this.state = {
             value: false,
             columns: [
-                'deceduti',
-                'dimessi_guariti',
-                'isolamento_domiciliare',
-                'nuovi_attualmente_positivi',
-                'ricoverati_con_sintomi',
-                'tamponi',
-                'terapia_intensiva',
-                'totale_attualmente_positivi',
-                'totale_casi',
-                'totale_ospedalizzati'
+                'active',
+                'cases',
+                'casesPerOneMillion',
+                'country',
+                'critical',
+                'deaths',
+                'deathsPerOneMillion',
+                'recovered',
+                'testsPerOneMillion',
+                'todayCases',
+                'todayDeaths',
+                'totalTests'
             ]
         }
+    }
+
+    componentDidMount(){
+        fetch(properties.websiteUrlAllCountries)
+          .then(response => response.json())
+          .then(jsonResponse => this.setState({ data: jsonResponse.filter(i => i.country==='Italy') }))
     }
 
     getValue(field){
@@ -32,10 +42,11 @@ class ItalyRadialChart extends React.Component {
 
     parseDataToPercent(dataToParse){
         
-        const totalCases = Object.keys(dataToParse)
+        /*const totalCases = Object.keys(dataToParse)
                 .map(key => dataToParse[key])
                 .filter(v => this.isNumber(v))
-                .reduce((a,b) => a+b);       
+                .reduce((a,b) => a+b);      */
+        let totalCases=10000 
 
         let parsedData = []
 
@@ -51,12 +62,13 @@ class ItalyRadialChart extends React.Component {
 
     render(){
 
-        const { value } = this.state
-        const parsedData = [];//this.props.data !== undefined ? this.parseDataToPercent(this.props.data) : []
-
+        const { value, data, columns } = this.state
+        console.log(data)
+        const parsedData = (data !==null && data !== undefined && data.length>0) ? this.parseDataToPercent(data) : []
+        console.log(parsedData)
         return(
             <div>
-                 <RadialChart
+                {/*<RadialChart
                     className={'donut-chart'}
                     innerRadius={100}
                     radius={140}
@@ -72,7 +84,7 @@ class ItalyRadialChart extends React.Component {
                     <Hint value={value}>
                         <p style={{background: 'black'}}>{value.theta}</p>q
                     </Hint>}
-                </RadialChart>
+                </RadialChart>*/}
             </div>
         )
     }

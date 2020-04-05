@@ -82,7 +82,7 @@ class TableData extends React.Component {
             { tempData.map((i, index) => {
               return(
                 <Table.Row key={index}>
-                  <Table.Cell style={{fontSize: '25px'}}>{i.country}</Table.Cell>
+                  <Table.Cell style={{fontSize: '20px'}}>{i.country}</Table.Cell>
                   {this.renderSingleTableRow(responsive, columns[1].label, i.cases, columns[1].color)}
                   {this.renderSingleTableRow(responsive, columns[2].label, i.todayCases, columns[2].color)}
                   {this.renderSingleTableRow(responsive, columns[3].label, i.deaths, columns[3].color)}

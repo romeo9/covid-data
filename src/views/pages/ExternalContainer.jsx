@@ -1,7 +1,7 @@
 import React from 'react';
 import Title from '../title/Title';
 import TableData from '../data/TableData';
-import AllCountry from '../data/AllCountry';
+import WorldData from '../data/WorldData';
 import { Grid, Container } from 'semantic-ui-react';
 import { properties } from '../../properties/properties'
 import ItalyData from '../data/ItalyData';
@@ -37,6 +37,11 @@ class ExternalContainer extends React.Component {
   render (){
     const data = this.state.data
 
+    let worldData = []
+    if(data !== null && data !== undefined && data.length > 0){
+        worldData = data.filter(i => i.country === "World")
+    }
+
     const middleRowColumns = this.state.width > 700 ? 2 : 1;
 
 
@@ -50,9 +55,9 @@ class ExternalContainer extends React.Component {
                 </Grid.Row>
                 <Grid.Row columns={middleRowColumns}>
                     <Grid.Column className='all-country-column'>
-                        <AllCountry
+                        <WorldData
                             className='all-country'
-                            data = {data}
+                            data = {worldData}
                         />
                     </Grid.Column>
                     <Grid.Column>
@@ -66,7 +71,7 @@ class ExternalContainer extends React.Component {
                     <Grid.Column>
                         <TableData
                             responsive = {this.state.width <= 700}
-                            data = {data}
+                            data = {data.filter((i, index) => index > 0)}
                         />
                         </Grid.Column>
                 </Grid.Row>

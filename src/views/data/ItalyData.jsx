@@ -34,7 +34,7 @@ class ItalyData extends React.Component {
                             Sum of Infection data of Italy
                         </Header.Subheader>
                     </Header>
-                    <Statistic.Group className={this.props.className} widths={3} size='small' >
+                    <Statistic.Group className={this.props.className} widths={3} size='tiny' >
                         <Statistic  color='red'>
                             <Statistic.Value>{this.numberWithCommas(cases)}</Statistic.Value>
                             <Statistic.Label>Cases</Statistic.Label>
