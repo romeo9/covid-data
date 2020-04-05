@@ -1,7 +1,7 @@
 import React from 'react';
-import { RadialChart, Hint } from 'react-vis';
+import { RadialChart, Hint, DiscreteColorLegend } from 'react-vis';
 import { properties } from '../../properties/properties'
-
+import { Label, Container, Segment, Grid} from 'semantic-ui-react';
 
 class ItalyRadialChart extends React.Component {
 
@@ -11,17 +11,9 @@ class ItalyRadialChart extends React.Component {
             value: false,
             columns: [
                 'active',
-                'cases',
-                'casesPerOneMillion',
-                'country',
                 'critical',
                 'deaths',
-                'deathsPerOneMillion',
                 'recovered',
-                'testsPerOneMillion',
-                'todayCases',
-                'todayDeaths',
-                'totalTests'
             ]
         }
     }
@@ -42,50 +34,81 @@ class ItalyRadialChart extends React.Component {
 
     parseDataToPercent(dataToParse){
         
-        /*const totalCases = Object.keys(dataToParse)
-                .map(key => dataToParse[key])
-                .filter(v => this.isNumber(v))
-                .reduce((a,b) => a+b);      */
-        let totalCases=10000 
+        if(dataToParse !== undefined && dataToParse!== null && dataToParse.length> 0){
+            let parsedData = []
 
-        let parsedData = []
+            this.state.columns.forEach(element => {
+                const singleData = dataToParse[0][element]
+                let percentData = ((singleData*100)/dataToParse[0].cases).toFixed(0)
 
-        this.state.columns.forEach(element => {
-            const singleData = dataToParse[element]
-            let percentData = ((singleData*100)/totalCases).toFixed(0)
-            parsedData.push({theta: Number(percentData), label: element})
-        });
+            
+                parsedData.push({theta: Number(percentData), label: element})
+            });
 
-        return parsedData
-
+        } else {
+            return []
+        }
     }
 
     render(){
 
         const { value, data, columns } = this.state
-        console.log(data)
-        const parsedData = (data !==null && data !== undefined && data.length>0) ? this.parseDataToPercent(data) : []
-        console.log(parsedData)
+        let parsedData = []
+
+        if(data !== undefined && data!== null && data.length> 0){
+
+            this.state.columns.forEach(element => {
+                const singleData = data[0][element]
+                let percentData = ((singleData*100)/data[0].cases).toFixed(0)
+                parsedData.push({theta: Number(percentData), label: element})
+            });
+        }
+
         return(
-            <div>
-                {/*<RadialChart
-                    className={'donut-chart'}
-                    innerRadius={100}
-                    radius={140}
-                    getAngle={d => d.theta}
-                    data={parsedData}
-                    onValueMouseOver={v => {this.setState({value: v}); console.log(v)}}
-                    onSeriesMouseOut={v => this.setState({value: false})}
-                    width={300}
-                    height={300}
-                    padAngle={0.04}
-                >
-                {value !== false && 
-                    <Hint value={value}>
-                        <p style={{background: 'black'}}>{value.theta}</p>q
-                    </Hint>}
-                </RadialChart>*/}
-            </div>
+            <Container>
+                <Segment color='teal'><h3>Distribuzione in percentuale</h3>
+                </Segment>
+
+                <Grid columns={2}>
+                    <Grid.Row>
+                        <Grid.Column width={6}>
+                            <RadialChart
+                                className={'donut-chart'}
+                                innerRadius={100}
+                                radius={140}
+                                getAngle={d => d.theta}
+                                data={parsedData}
+                                onValueMouseOver={v => this.setState({value: v})}
+                                onSeriesMouseOut={v => this.setState({value: false})}
+                                width={300}
+                                height={300}
+                                padAngle={0.04}
+                            >
+                            {value !== false && 
+                                <Hint value={value} align='horizontal'>
+                                    <Label as='a' basic>
+                                        {value.theta}% 
+                                        {value.label === 'active' ? ' Attivi': ''}
+                                        {value.label === 'critical' ? ' Critici': ''}
+                                        {value.label === 'deaths' ? ' Morti': ''}
+                                        {value.label === 'recovered' ? ' Dimessi': ''}
+                                    </Label>
+                                </Hint>}
+                            </RadialChart>
+                        </Grid.Column>
+                        <Grid.Column width={10}>
+                            <DiscreteColorLegend 
+                            height={200} 
+                            width={300} 
+                            items={['Dimessi', 'Attivi', 'Morti', 'Critici']} 
+                            />
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
+               
+
+
+            </Container>
         )
     }
 

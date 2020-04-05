@@ -9,7 +9,6 @@ class ItalyInfo extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            confirmedCasesPerDay: [],
             dataRegions: []
         }
     }
@@ -27,24 +26,24 @@ class ItalyInfo extends React.Component {
 
     render() {
 
-        const { confirmedCasesPerDay, height, width } = this.state
+        const { height, width } = this.state
 
         return(
             <Grid columns={width <= 1220 ? 1 : 2} verticalAlign={ width <= 1220 ? 'middle' : null}>
                 <Grid.Row>
                     <Grid.Column >
-                        <div style={{marginTop: '6em', marginLeft: '5em'}}>
-                        <Card 
-                            link
-                            header='Totali Attualmente Positivi'
-                            meta={<Flag name='it' />}
-                            description={[
-                            'L\'andamento mostra l\'evoluzione del contagio,',
-                            ' da Covid-19, da un mese ad oggi.',
-                            ].join('')}
-                        />
-                        </div>
-
+                            <div style={{marginTop: '6em', marginLeft: '5em'}}>
+                            <Card 
+                                link
+                                header='Totali Attualmente Positivi'
+                                meta={<Flag name='it' />}
+                                description={[
+                                'L\'andamento mostra l\'evoluzione del contagio,',
+                                ' da Covid-19, da un mese ad oggi.',
+                                ].join('')}
+                            />
+                            </div>
+                        
                     </Grid.Column>
                     <Grid.Column >
                             <ItalyAxesPlot
@@ -53,9 +52,11 @@ class ItalyInfo extends React.Component {
                         />
                     </Grid.Column>
                 </Grid.Row>
+                <Grid.Row columns={1}>
                     <Grid.Column>
                         <ItalyRadialChart/>
                     </Grid.Column>
+                </Grid.Row>
             </Grid>
         )
     }
